@@ -1,29 +1,24 @@
 
 import { Minus } from "@assets/control-icons/minus";
 import { Plus } from "@assets/control-icons/plus";
-import { useState } from "react";
 
 import { Answer,  QuestionBlock, Title, Wrapper } from "./styled";
 
 export type QuestionCardProps = {
   question: string;
   answer: string;
+  active: boolean;
+  handleActive: () => void;
 };
 
-export const QuestionCard = ({ question, answer }: QuestionCardProps) => {
-  const [show, setShow] = useState(false);
-
-  const handleShow = () => {
-    setShow(!show);
-  };
-
+export const QuestionCard = ({ question, answer , handleActive, active}: QuestionCardProps) => {
   return (
-    <Wrapper onClick={handleShow}>
+    <Wrapper onClick={handleActive}>
       <QuestionBlock>
-        <Title active={show}>{question}</Title>
-        {show ? <Minus/> : <Plus />}
+        <Title active={active}>{question}</Title>
+        {active ? <Minus/> : <Plus />}
       </QuestionBlock>
-      {show && <Answer>{answer}</Answer>}
+      {active && <Answer>{answer}</Answer>}
     </Wrapper>
   );
 };
